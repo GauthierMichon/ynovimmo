@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
- 
+import 'package:ynov_immo/api.dart';
+
 class Annonce extends StatelessWidget {
+  RealEstate estate;
+  Annonce({@required this.estate});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,69 +15,63 @@ class Annonce extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      child:  Row(
+      child: Row(
         children: <Widget>[
-
           Image(
-            image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+            image: NetworkImage(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
             height: 150,
             width: 150,
           ),
-
-          Column(
-            children: <Widget>[
-              Text(
-                "Maison de charme",
-                  textAlign: TextAlign.right,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  estate.accroche,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.blue,
                     decoration: TextDecoration.underline,
                   ),
                 ),
-
-              Text(
-                "Talence, Forum",
-                  textAlign: TextAlign.right,
+                Text(
+                  estate.address,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
                   ),
                 ),
-
-              Text(
-                "Jardin, pierre apparente",
-                  textAlign: TextAlign.right,
+                Text(
+                  estate.description,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
                   ),
                 ),
-
-              Row(
-                children: [
-                  Text(
-                    "il y a 20sec",
-                      textAlign: TextAlign.right,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "il y a 20sec",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
-
-                  Text(
-                    "115 000€",
-                      textAlign: TextAlign.right,
+                    Text(
+                      estate.price.toString(),
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.red,
                       ),
                     ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           )
-          
         ],
       ),
     );
